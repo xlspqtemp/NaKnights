@@ -20,9 +20,10 @@ public class NeutrophilScript : MonoBehaviour
         {
             return;
         }
-
+/*
         InvokeRepeating(nameof(AttackBacteria), 1f, 1f);
         Destroy(gameObject, health);
+        */
     }
 
     private void Update()
@@ -31,7 +32,7 @@ public class NeutrophilScript : MonoBehaviour
         {
             return;
         }
-
+/*
         if (target == null)
         {
             Track();
@@ -46,8 +47,9 @@ public class NeutrophilScript : MonoBehaviour
         {
             agent.ResetPath();
         }
+        */
     }
-
+/*
     void Track()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Bacteria");
@@ -80,4 +82,5 @@ public class NeutrophilScript : MonoBehaviour
             }
         }
     }
+    */
 }

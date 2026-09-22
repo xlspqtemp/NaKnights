@@ -11,15 +11,6 @@ public class MacrophageScript : MonoBehaviour
     public int health = 300;
     private bool isCirculatoryCell;
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        // Make sure your Lava Block GameObject has the Tag "Lava"
-        if (other.CompareTag("Lava"))
-        {
-            temp = 10f;
-        }
-    }*/
-
     private void Start()
     {
         isCirculatoryCell = GetComponent<CirculatoryCellRoute>() != null;
@@ -28,9 +19,10 @@ public class MacrophageScript : MonoBehaviour
         {
             return;
         }
-
+/*
         InvokeRepeating(nameof(AttackBacteria), 1f, 1f);
         Destroy(gameObject, health);
+        */
     }
 
     private void Update()
@@ -39,7 +31,7 @@ public class MacrophageScript : MonoBehaviour
         {
             return;
         }
-
+/*
         if (target == null)
         {
             Track();
@@ -49,13 +41,13 @@ public class MacrophageScript : MonoBehaviour
         {
             agent.SetDestination(target.position);
         }
-
         else
         {
             agent.ResetPath();
         }
+        */
     }
-
+/*
     void Track()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Bacteria");
@@ -88,4 +80,5 @@ public class MacrophageScript : MonoBehaviour
             }
         }
     }
+    */
 }

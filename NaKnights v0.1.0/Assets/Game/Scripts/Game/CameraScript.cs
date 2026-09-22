@@ -13,6 +13,9 @@ public class CameraScript : MonoBehaviour
     [Header("Tactical Orders")]
     [SerializeField] private CanvasGroup tacticalOrdersCanvasGroup;
 
+    [Header("Respiratory Orders")]
+    [SerializeField] private CanvasGroup respiratoryOrdersCanvasGroup;
+
     [Header("Camera Movement Audio")]
     [SerializeField] private AudioSource movementAudioSource;
     [SerializeField] private AudioClip movementSfx;
@@ -23,7 +26,7 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
-        SetTacticalOrdersVisible(false);
+        SetOrdersVisibility(false, false);
     }
 
     private void Update()
@@ -42,38 +45,44 @@ public class CameraScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             transform.position = floor1.position;
-            SetTacticalOrdersVisible(false);
+            SetOrdersVisibility(false, false);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
             transform.position = floor2.position;
-            SetTacticalOrdersVisible(true);
+            SetOrdersVisibility(true, false);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
             transform.position = floor3.position;
-            SetTacticalOrdersVisible(false);
+            SetOrdersVisibility(false, false);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
             transform.position = floor4.position;
-            SetTacticalOrdersVisible(false);
+            SetOrdersVisibility(false, true);
             PlayLayerSwitchSound();
         }
 
         UpdateMovementAudio(Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f);
     }
 
-    private void SetTacticalOrdersVisible(bool isVisible)
+    private void SetOrdersVisibility(bool circulatoryVisible, bool respiratoryVisible)
     {
-        if (tacticalOrdersCanvasGroup != null)
+        SetCanvasGroupVisibility(tacticalOrdersCanvasGroup, circulatoryVisible);
+        SetCanvasGroupVisibility(respiratoryOrdersCanvasGroup, respiratoryVisible);
+    }
+
+    private static void SetCanvasGroupVisibility(CanvasGroup canvasGroup, bool isVisible)
+    {
+        if (canvasGroup != null)
         {
-            tacticalOrdersCanvasGroup.alpha = isVisible ? 1f : 0f;
-            tacticalOrdersCanvasGroup.interactable = isVisible;
-            tacticalOrdersCanvasGroup.blocksRaycasts = isVisible;
+            canvasGroup.alpha = isVisible ? 1f : 0f;
+            canvasGroup.interactable = isVisible;
+            canvasGroup.blocksRaycasts = isVisible;
         }
     }
 
