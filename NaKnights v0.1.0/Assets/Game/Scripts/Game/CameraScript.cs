@@ -16,6 +16,9 @@ public class CameraScript : MonoBehaviour
     [Header("Respiratory Orders")]
     [SerializeField] private CanvasGroup respiratoryOrdersCanvasGroup;
 
+    [Header("Digestive Orders")]
+    [SerializeField] private CanvasGroup digestiveOrdersCanvasGroup;
+
     [Header("Camera Movement Audio")]
     [SerializeField] private AudioSource movementAudioSource;
     [SerializeField] private AudioClip movementSfx;
@@ -26,7 +29,7 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
-        SetOrdersVisibility(false, false);
+        SetOrdersVisibility(false, false, false);
     }
 
     private void Update()
@@ -45,35 +48,36 @@ public class CameraScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             transform.position = floor1.position;
-            SetOrdersVisibility(false, false);
+            SetOrdersVisibility(false, false, false);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.G))
         {
             transform.position = floor2.position;
-            SetOrdersVisibility(true, false);
+            SetOrdersVisibility(true, false, false);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.H))
         {
             transform.position = floor3.position;
-            SetOrdersVisibility(false, false);
+            SetOrdersVisibility(false, false, true);
             PlayLayerSwitchSound();
         }
         else if (Input.GetKeyDown(KeyCode.J))
         {
             transform.position = floor4.position;
-            SetOrdersVisibility(false, true);
+            SetOrdersVisibility(false, true, false);
             PlayLayerSwitchSound();
         }
 
         UpdateMovementAudio(Mathf.Abs(horizontal) > 0.01f || Mathf.Abs(vertical) > 0.01f);
     }
 
-    private void SetOrdersVisibility(bool circulatoryVisible, bool respiratoryVisible)
+    private void SetOrdersVisibility(bool circulatoryVisible, bool respiratoryVisible, bool digestiveVisible)
     {
         SetCanvasGroupVisibility(tacticalOrdersCanvasGroup, circulatoryVisible);
         SetCanvasGroupVisibility(respiratoryOrdersCanvasGroup, respiratoryVisible);
+        SetCanvasGroupVisibility(digestiveOrdersCanvasGroup, digestiveVisible);
     }
 
     private static void SetCanvasGroupVisibility(CanvasGroup canvasGroup, bool isVisible)
